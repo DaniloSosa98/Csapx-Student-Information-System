@@ -6,7 +6,7 @@ import java.util.Comparator;
  *
  * @author YOUR NAME HERE
  */
-public class CourseComparator implements Comparator<Course> {
+public class CourseComparator extends Object implements Comparator<Course> {
     @Override
     public int compare(Course o1, Course o2) {
         // TODO

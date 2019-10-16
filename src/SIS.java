@@ -31,7 +31,7 @@ import java.util.Scanner;
  * @author Sean Strout @ RITCS
  * @author YOUR NAME HERE
  */
-public class SIS {
+public class SIS extends Object{
     /** the course command */
     public final static String COURSE = "course";
     /** the courses command */
@@ -52,6 +52,7 @@ public class SIS {
     public final static String QUIT = "quit";
 
     // TODO add the backend data member here
+    private Backend backend;
 
     /**
      * Create the backend.

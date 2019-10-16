@@ -6,7 +6,7 @@ import java.util.*;
  * @author Sean Strout @ RIT CS
  * @author YOUR NAME HERE
  */
-public class Course implements Comparable<Course> {
+public class Course extends Object implements Comparable<Course> {
     /** course id (unique) */
     private int id;
     /** course name */
@@ -106,7 +106,6 @@ public class Course implements Comparable<Course> {
         // TODO
         return false;
     }
-
     /**
      * Remove a student from the course, if they are enrolled,
      * <b>in constant time</b>.
@@ -144,7 +143,10 @@ public class Course implements Comparable<Course> {
         // TODO
         return false;
     }
-
+    @Override
+    public int hashCode(){
+        return this.id;
+    }
     /**
      * The hash code of a course is the course's id.
      *
