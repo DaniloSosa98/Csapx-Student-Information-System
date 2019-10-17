@@ -6,6 +6,7 @@ public class CourseDB extends Object implements DB<Integer, Course>{
     private HashMap<Integer, Course> courses;
 
     public CourseDB() {
+        this.courses = new HashMap<Integer, Course>();
     }
 
     @Override

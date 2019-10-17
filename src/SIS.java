@@ -130,9 +130,10 @@ public class SIS extends Object{
      * @throws FileNotFoundException if a file is not found
      */
     public static void main(String[] args) throws FileNotFoundException {
+        Backend test = new Backend("data/course-1.txt", "data/professor-1.txt", "data/student-1.txt");
         // display a usage message if the number of command line arguments
         // is not correct
-        if (args.length < 3 || args.length > 4) {
+        /*if (args.length < 3 || args.length > 4) {
             System.out.println("Usage: java SIS course-file professor-file student-file [input]");
             return;
         }
@@ -154,6 +155,6 @@ public class SIS extends Object{
         }
 
         // enter the main loop
-        sis.mainLoop(in, stdin);
+        sis.mainLoop(in, stdin);*/
     }
 }

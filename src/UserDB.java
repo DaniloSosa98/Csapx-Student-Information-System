@@ -6,6 +6,7 @@ public class UserDB extends Object implements DB<String, User>{
     HashMap<String, User> users;
 
     public UserDB() {
+        this.users = new HashMap<String, User>();
     }
 
     @Override

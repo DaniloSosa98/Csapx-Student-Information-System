@@ -13,6 +13,7 @@ public class Backend extends Object{
     }
 
     private void addCourses(User user, String[] courseIds){
+
         for (int i = 0; i < courseIds.length; i++) {
             int id = Integer.parseInt(courseIds[i]);
             if (this.courseExists(id)){
@@ -107,6 +108,7 @@ public class Backend extends Object{
                 for (int i = 1; i < fields.length; i++) {
                     courses[i-1] = fields[i];
                 }
+
                 this.addCourses(temp, courses);
                 //adds courses to professor
                 this.userDB.addValue(temp);

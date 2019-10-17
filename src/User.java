@@ -16,36 +16,50 @@ public class User extends Object implements Comparable<User>{
     public User(String username, User.UserType type, Comparator<Course> comp) {
         this.username = username;
         this.type = type;
+        this.courses = new TreeSet<Course>();
     }
 
     boolean addCourse(Course course){
-        return false;
+
+        return this.courses.add(course);
     }
 
     @Override
     public int compareTo(User other) {
-        return 0;
+        return this.username.compareTo(other.getUsername());
     }
 
     Collection<Course> getCourses(){
-        return null;
+
+        return this.courses;
     }
 
     User.UserType getType(){
-        return null;
+
+        return this.type;
     }
 
     String getUsername(){
-        return null;
+
+        return this.username;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if(this.username == ((User)other).getUsername()){
+            return true;
+        }
+        return false;
     }
 
     @Override
     public int hashCode(){
+
         return this.username.hashCode();
     }
 
     boolean removeCourse(Course course){
-        return false;
+        return this.courses.remove(course);
     }
 
     @Override
