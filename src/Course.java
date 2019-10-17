@@ -40,8 +40,7 @@ public class Course extends Object implements Comparable<Course> {
      * @return course id
      */
     public int getId() {
-        // TODO
-        return 0;
+        return this.id;
     }
 
     /**
@@ -50,8 +49,7 @@ public class Course extends Object implements Comparable<Course> {
      * @return course name
      */
     public String getName() {
-        // TODO
-        return null;
+        return this.name;
     }
 
     /**
@@ -60,8 +58,7 @@ public class Course extends Object implements Comparable<Course> {
      * @return course level
      */
     public int getLevel() {
-        // TODO
-        return 0;
+        return this.level;
     }
 
     /**
@@ -70,8 +67,7 @@ public class Course extends Object implements Comparable<Course> {
      * @return the professor, if none, null
      */
     public String getProfessor() {
-        // TODO
-        return null;
+        return this.professor;
     }
 
     /**
@@ -81,8 +77,7 @@ public class Course extends Object implements Comparable<Course> {
      *  are no students enrolled the list should be empty.
      */
     public Collection<String> getStudents() {
-        // TODO
-        return null;
+        return this.students;
     }
 
     /**
@@ -92,7 +87,7 @@ public class Course extends Object implements Comparable<Course> {
      * @param username the username of the professor
      */
     public void addProfessor(String username) {
-        // TODO
+        this.professor = username;
     }
 
     /**
@@ -103,8 +98,8 @@ public class Course extends Object implements Comparable<Course> {
      * @return whether the student was added or not
      */
     public boolean addStudent(String username) {
-        // TODO
-        return false;
+        this.students.add(username);
+        return true;
     }
     /**
      * Remove a student from the course, if they are enrolled,
@@ -114,7 +109,11 @@ public class Course extends Object implements Comparable<Course> {
      * @return true if the student was removed, false if the student was not in the course
      */
     public boolean removeStudent(String username) {
-        // TODO
+        if(this.students.contains(username)){
+            System.out.println("Student removed");
+            return true;
+        }
+        System.out.println("Student was not in the course");
         return false;
     }
 
@@ -128,8 +127,12 @@ public class Course extends Object implements Comparable<Course> {
      */
     @Override
     public int compareTo(Course other) {
-        // TODO
-        return 0;
+        if(this.id<other.getId()){
+            return -1;
+        }else if(this.id == other.getId()){
+            return 0;
+        }
+        return 1;
     }
 
     /**
@@ -140,7 +143,9 @@ public class Course extends Object implements Comparable<Course> {
      */
     @Override
     public boolean equals(Object other) {
-        // TODO
+        if(this.compareTo((Course)other) == 0){
+            return true;
+        }
         return false;
     }
     @Override
@@ -168,7 +173,8 @@ public class Course extends Object implements Comparable<Course> {
      */
     @Override
     public String toString() {
-        // TODO
-        return null;
+        return "Course{id=" +this.id+ ", name=" +this.name+", level="
+                +this.level+", professor=" +this.professor+", students="
+                +this.students + "}";
     }
 }

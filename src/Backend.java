@@ -13,30 +13,65 @@ public class Backend extends Object{
     }
 
     private void addCourses(User user, String[] courseIds){
-
+        for (int i = 0; i < courseIds.length; i++) {
+            int id = Integer.parseInt(courseIds[i]);
+            if (this.courseExists(id)){
+                user.addCourse(this.getCourse(id));
+                System.out.println("Course added to: " + user.getUsername());
+                if(user.getType() == User.UserType.STUDENT){
+                    this.courseDB.getValue(id).addStudent(user.getUsername());
+                    System.out.println("Student added to: " + this.courseDB.getValue(id).getName());
+                }else if(user.getType() == User.UserType.PROFESSOR){
+                    this.courseDB.getValue(id).addProfessor(user.getUsername());
+                    System.out.println("Professor added to: " + this.courseDB.getValue(id).getName());
+                }
+            }
+        }
     }
 
     boolean courseExists(int id){
+        if(this.courseDB.hasKey(id)){
+            System.out.println("Course exists");
+            return true;
+        }
+        System.out.println("Course does not exists");
         return false;
     }
 
     boolean enrollStudent(String username, int courseId){
+        if(this.userExists(username) && this.isStudent(username) && this.courseExists(courseId)){
+            this.userDB.getValue(username).addCourse(this.getCourse(courseId));
+            this.courseDB.getValue(courseId).addStudent(username);
+            System.out.println("Succesfully enrolled");
+            return true;
+        }
+        System.out.println("Not able to enroll");
         return false;
     }
 
     Collection<Course> getAllCourses(){
-        return null;
+        System.out.println("All courses: ");
+        return this.courseDB.getAllValues();
     }
 
     Collection<User> getAllUsers(){
-        return null;
+        System.out.println("All users: ");
+        return this.userDB.getAllValues();
     }
 
     Course getCourse(int id){
+        if(this.courseExists(id)){
+            return this.courseDB.getValue(id);
+        }
+        System.out.println("Couldn't get course");
         return null;
     }
 
     Collection<Course> getCourseUser(String username){
+        if(this.userExists(username)){
+            return this.userDB.getValue(username).getCourses();
+        }
+        System.out.println("No courses for non-existent user");
         return null;
     }
 
@@ -72,7 +107,7 @@ public class Backend extends Object{
                 for (int i = 1; i < fields.length; i++) {
                     courses[i-1] = fields[i];
                 }
-
+                this.addCourses(temp, courses);
                 //adds courses to professor
                 this.userDB.addValue(temp);
             }
@@ -84,25 +119,44 @@ public class Backend extends Object{
                 String username = fields[0];
                 User.UserType type = User.UserType.STUDENT;
                 temp = new Student(username, type, new StudentComparator());
-                //new professor
+                //new student
+                String[] courses = new String[fields.length-1];
                 for (int i = 1; i < fields.length; i++) {
-                    temp.addCourse(this.courseDB.getValue(Integer.parseInt(fields[i])));
+                    courses[i-1] = fields[i];
                 }
-                //adds courses to professor
+                this.addCourses(temp, courses);
+                //adds courses to student
                 this.userDB.addValue(temp);
             }
         }
     }
 
     boolean isStudent(String username){
+        if (this.userExists(username) && this.userDB.getValue(username).getType() == User.UserType.STUDENT){
+            System.out.println(username + " is a Student");
+            return true;
+        }
+        System.out.println("Not a student, or does not exists");
         return false;
     }
 
     boolean unenrollStudent(String username, int courseId){
+        if(this.userExists(username) && this.isStudent(username) && this.courseExists(courseId)){
+            this.userDB.getValue(username).removeCourse(this.getCourse(courseId));
+            this.courseDB.getValue(courseId).removeStudent(username);
+            System.out.println("Student unenrolled");
+            return true;
+        }
+        System.out.println("Not a student or course does not exists");
         return false;
     }
 
     boolean userExists(String username){
+        if(this.userDB.hasKey(username)){
+            System.out.println("User exists");
+            return true;
+        }
+        System.out.println("User does not exists");
         return false;
     }
 

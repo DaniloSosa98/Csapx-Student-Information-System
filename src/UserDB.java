@@ -10,21 +10,35 @@ public class UserDB extends Object implements DB<String, User>{
 
     @Override
     public User addValue(User user) {
-        return null;
+        User temp = null;
+        if(this.hasKey(user.getUsername())){
+            temp = this.getValue(user.getUsername());
+            this.users.put(user.getUsername(), user);
+            return temp;
+        }
+        this.users.put(user.getUsername(), user);
+        return temp;
     }
 
     @Override
     public Collection<User> getAllValues() {
-        return null;
+
+        return this.users.values();
     }
 
     @Override
     public User getValue(String username) {
+        if(this.hasKey(username)){
+            return this.users.get(username);
+        }
         return null;
     }
 
     @Override
     public boolean hasKey(String username) {
+        if(this.users.containsKey(username)){
+            return true;
+        }
         return false;
     }
 }
