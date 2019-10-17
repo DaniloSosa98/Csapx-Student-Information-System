@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Scanner;
 
@@ -131,6 +132,13 @@ public class SIS extends Object{
      */
     public static void main(String[] args) throws FileNotFoundException {
         Backend test = new Backend("data/course-1.txt", "data/professor-1.txt", "data/student-1.txt");
+        test.getAllCourses();
+        test.getAllUsers();
+        test.getCourseUser("hpb");
+        test.getCourseUser("cc2");
+        test.unenrollStudent("cc2", 4);
+        test.getCourseUser("cc2");
+        test.getCourse(4);
         // display a usage message if the number of command line arguments
         // is not correct
         /*if (args.length < 3 || args.length > 4) {

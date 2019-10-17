@@ -1,5 +1,4 @@
-import java.util.Collection;
-import java.util.HashMap;
+import java.util.*;
 
 public class UserDB extends Object implements DB<String, User>{
 
@@ -24,7 +23,10 @@ public class UserDB extends Object implements DB<String, User>{
     @Override
     public Collection<User> getAllValues() {
 
-        return this.users.values();
+        TreeMap<String, User> sorted = new TreeMap<>();
+        sorted.putAll(this.users);
+
+        return sorted.values();
     }
 
     @Override

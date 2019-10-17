@@ -1,6 +1,4 @@
-import java.util.Collection;
-import java.util.Comparator;
-import java.util.TreeSet;
+import java.util.*;
 
 public class User extends Object implements Comparable<User>{
 
@@ -12,11 +10,12 @@ public class User extends Object implements Comparable<User>{
     private TreeSet<Course> courses;
     private User.UserType type;
     private String username;
+    //private Comparator<Course> comp;
 
     public User(String username, User.UserType type, Comparator<Course> comp) {
         this.username = username;
         this.type = type;
-        this.courses = new TreeSet<Course>();
+        this.courses = new TreeSet<Course>(comp);
     }
 
     boolean addCourse(Course course){
@@ -26,11 +25,14 @@ public class User extends Object implements Comparable<User>{
 
     @Override
     public int compareTo(User other) {
+        System.out.println(this.username.compareTo(other.getUsername()));
         return this.username.compareTo(other.getUsername());
     }
 
     Collection<Course> getCourses(){
-
+        for (Course c: this.courses) {
+            System.out.println(c);
+        }
         return this.courses;
     }
 
@@ -62,9 +64,16 @@ public class User extends Object implements Comparable<User>{
         return this.courses.remove(course);
     }
 
+    List<String> courseList(){
+        ArrayList<String> courselist = new ArrayList<>();
+        for (Course c: this.courses) {
+            courselist.add(c.getName());
+        }
+        return courselist;
+    }
     @Override
     public String toString(){
         return "User{username = " + this.username + ", type = " + this.type +
-                ", courses = " + this.courses;
+                ", courses = " + this.courseList();
     }
 }

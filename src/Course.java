@@ -110,7 +110,8 @@ public class Course extends Object implements Comparable<Course> {
      */
     public boolean removeStudent(String username) {
         if(this.students.contains(username)){
-            System.out.println("Student removed");
+            //System.out.println("Student removed");
+            this.students.remove(username);
             return true;
         }
         System.out.println("Student was not in the course");
