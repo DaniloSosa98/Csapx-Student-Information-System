@@ -9,7 +9,7 @@ import java.util.Comparator;
 public class CourseComparator extends Object implements Comparator<Course> {
     @Override
     public int compare(Course o1, Course o2) {
-        // TODO
-        return 0;
+        int result = o1.getName().compareTo(o2.getName());
+        return result;
     }
 }

@@ -63,7 +63,7 @@ public class SIS extends Object{
      * @throws FileNotFoundException if any of the files cannot be found
      */
     public SIS(String courseFile, String professorFile, String studentFile) throws FileNotFoundException {
-        // TODO create the backend here
+        this.backend = new Backend(courseFile, professorFile, studentFile);
     }
 
     /**
