@@ -69,9 +69,8 @@ public class Backend extends Object{
     Course getCourse(int id){
         Course temp = null;
         if(this.courseExists(id)){
-            System.out.println("Course: ");
             temp = this.courseDB.getValue(id);
-            System.out.println(temp);
+            //System.out.println(temp);
             return temp;
         }
         System.out.println("Couldn't get course");

@@ -30,7 +30,7 @@ import java.util.Scanner;
  * <br>
  *
  * @author Sean Strout @ RITCS
- * @author YOUR NAME HERE
+ * @author Danilo Sosa
  */
 public class SIS extends Object{
     /** the course command */
@@ -81,7 +81,9 @@ public class SIS extends Object{
         System.out.println("users: list all users (alphabetically by username) ");
         System.out.println("quit: quit SIS");
     }
-
+    private void listcourse(int courseId){
+        System.out.println(this.backend.getCourse(courseId));
+    }
     /**
      * The main loop runs through the input commands that 'in' is attached
      * to via the Scanner.  It prompts with '&gt;'.  If the command is valid it calls
@@ -113,6 +115,20 @@ public class SIS extends Object{
             // TODO handle commands here
             if (fields[0].equals(HELP)) {
                 helpMessage();
+            } else if (fields[0].equals(COURSE)) {
+                listcourse(Integer.parseInt(fields[1]));
+            } else if (fields[0].equals(COURSES)) {
+                this.backend.getAllCourses();
+            } else if (fields[0].equals(ENROLL)) {
+                this.backend.enrollStudent(fields[1], Integer.parseInt(fields[2]));
+            } else if (fields[0].equals(PROFESSOR)) {
+                this.backend.getCourseUser(fields[1]);
+            } else if (fields[0].equals(STUDENT)) {
+                this.backend.getCourseUser(fields[1]);
+            } else if (fields[0].equals(UNENROLL)) {
+                this.backend.unenrollStudent(fields[1], Integer.parseInt(fields[2]));
+            } else if (fields[0].equals(USERS)) {
+                this.backend.getAllUsers();
             } else if (fields[0].equals(QUIT)) {
                 break;
             } else {
@@ -131,23 +147,39 @@ public class SIS extends Object{
      * @throws FileNotFoundException if a file is not found
      */
     public static void main(String[] args) throws FileNotFoundException {
-        Backend test = new Backend("data/course-1.txt", "data/professor-1.txt", "data/student-1.txt");
+        /*Backend test = new Backend("data/course-1.txt", "data/professor-1.txt", "data/student-1.txt");
         test.getAllCourses();
+        System.out.println();
         test.getAllUsers();
+        System.out.println();
         test.getCourseUser("hpb");
+        System.out.println();
         test.getCourseUser("cc2");
+        System.out.println();
+        test.enrollStudent("cc2", 5);
+        System.out.println();
+        test.getCourseUser("cc2");
+        System.out.println();
         test.unenrollStudent("cc2", 4);
+        System.out.println();
         test.getCourseUser("cc2");
-        test.getCourse(4);
+        System.out.println();
+        System.out.println(test.getCourse(4));*/
         // display a usage message if the number of command line arguments
         // is not correct
-        /*if (args.length < 3 || args.length > 4) {
+
+        if (args.length < 3 || args.length > 4) {
             System.out.println("Usage: java SIS course-file professor-file student-file [input]");
             return;
         }
+        /*Backend test = new Backend(String.valueOf(args[0]), String.valueOf(args[1]),
+                String.valueOf(args[2]));*/
 
         // create the frontend and tie it to the backend
-        SIS sis = new SIS(args[0], args[1], args[2]);
+        String courseFile = args[0];
+        String professorFile = args[1];
+        String studentFile = args[2];
+        SIS sis = new SIS(courseFile, professorFile, studentFile);
 
         // create a scanner that is tied to either standard input or an input file
         Scanner in;
@@ -163,6 +195,7 @@ public class SIS extends Object{
         }
 
         // enter the main loop
-        sis.mainLoop(in, stdin);*/
+        sis.mainLoop(in, stdin);
+
     }
 }
