@@ -147,24 +147,6 @@ public class SIS extends Object{
      * @throws FileNotFoundException if a file is not found
      */
     public static void main(String[] args) throws FileNotFoundException {
-        /*Backend test = new Backend("data/course-1.txt", "data/professor-1.txt", "data/student-1.txt");
-        test.getAllCourses();
-        System.out.println();
-        test.getAllUsers();
-        System.out.println();
-        test.getCourseUser("hpb");
-        System.out.println();
-        test.getCourseUser("cc2");
-        System.out.println();
-        test.enrollStudent("cc2", 5);
-        System.out.println();
-        test.getCourseUser("cc2");
-        System.out.println();
-        test.unenrollStudent("cc2", 4);
-        System.out.println();
-        test.getCourseUser("cc2");
-        System.out.println();
-        System.out.println(test.getCourse(4));*/
         // display a usage message if the number of command line arguments
         // is not correct
 
